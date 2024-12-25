@@ -123,12 +123,12 @@ public:
 		m_image_raw = RawImage(m_image_width, m_image_height);
 
 		// reset the timer
-		m_start_time = system_clock::now();
+		// m_start_time = system_clock::now();
 		m_render_time = 0.0f;
+		m_start_time = std::chrono::high_resolution_clock::now();
 
 		// Reset the current iteration count
 		m_current_iteration = 0;
-
 	}
 
 	void render_row(int row) {
@@ -160,7 +160,7 @@ public:
 		// Render
 		std::cout << "Rendering iteration " << m_current_iteration << "/" << m_samples_per_pixel << std::endl;
 
-		auto start_time = std::chrono::high_resolution_clock::now();
+		// auto start_time = std::chrono::high_resolution_clock::now();
 		
 		// Create a vector of rows in reverse order using iota
 		std::vector<int> rows(m_image_height);
@@ -184,8 +184,8 @@ public:
 			}
 		}
 
-		auto end_time = std::chrono::high_resolution_clock::now();
-        m_render_time = std::chrono::duration<float>(end_time - start_time).count();
+		std::chrono::time_point<std::chrono::high_resolution_clock> end_time = std::chrono::high_resolution_clock::now();
+        m_render_time = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - m_start_time).count();
 
 		// bind the texture to the image
 		m_image.bind_texture();
@@ -198,7 +198,7 @@ private:
 	int m_max_depth;
 	int m_image_width;
 	int m_image_height;
-	system_clock::time_point m_start_time;
+	std::chrono::time_point<std::chrono::high_resolution_clock> m_start_time;
 	float m_render_time;
 	int m_current_iteration=0;
 	SceneName m_scene_name;

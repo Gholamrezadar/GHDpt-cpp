@@ -98,13 +98,13 @@ int main() {
             renderer.render();
         }
         else if(renderer.get_current_iteration() == renderer.get_samples_per_pixel()) {
-            std::cout<<"Rendering finished in "<<renderer.get_render_time()<<" seconds"<<std::endl;
+            std::cout<<"Rendering finished in "<<renderer.get_render_time()<<" miliseconds"<<std::endl;
             std::cout<<"\n";
             renderer.set_current_iteration(renderer.get_current_iteration() + 1);
         }
 
         // Render time
-        ImGui::Text("Render time: %.3f seconds", renderer.get_render_time());
+        ImGui::Text("Render time: %.0f ms", renderer.get_render_time());
 
         // divider
         ImGui::Separator();
