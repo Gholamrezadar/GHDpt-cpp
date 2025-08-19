@@ -30,6 +30,7 @@ file(GLOB IMGUI_SOURCES vendor/imgui/*.cpp)
 
 # Add the include directories
 include_directories(
+        src
         vendor
         vendor/imgui
         vendor/glfw/include
